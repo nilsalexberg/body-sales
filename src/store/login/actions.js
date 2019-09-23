@@ -4,7 +4,7 @@ import { Loading, Notify } from 'quasar'
 export function autenticar(store, { username, password }) {
   Loading.show();
   return new Promise((resolve, reject) => {
-    axios.post(`http://localhost:8888/proxy/posseidom.php?op=AutenticarJSON`, {
+    axios.post(`http://localhost:8888/posseidom.php?op=AutenticarJSON`, {
       Nome: username,
       Senha: password,
       Emp_ID: 216
