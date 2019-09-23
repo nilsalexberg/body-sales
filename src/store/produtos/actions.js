@@ -23,32 +23,33 @@ export function listar(store) {
         Loading.hide();
       });
   });
-
-  export function filtrar(store, params) {
-    Loading.show();
-    return new Promise((resolve, reject) => {
-      axios.post(`http://localhost:8888/posseidom.php?op=ObterProdutosPG`, {
-        Token: localStorage.getItem('token'),
-        pagina: 0,
-        grupo: params.group,
-        descricao: params.description
-      })
-        .then(({ data }) => {
-          console.log(data)
-          // store.commit
-        })
-        .catch(() => {
-          Notify.create({
-            color: 'red',
-            position: 'bottom',
-            message: 'Erro de conexão',
-            icon: 'ion-ios-warning'
-          })
-          reject();
-        })
-        .finally(() => {
-          Loading.hide();
-        });
-    });
-  }
 }
+
+export function filtrar(store, params) {
+  Loading.show();
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:8888/posseidom.php?op=ObterProdutosPG`, {
+      Token: localStorage.getItem('token'),
+      pagina: 0,
+      grupo: params.group,
+      descricao: params.description
+    })
+      .then(({ data }) => {
+        console.log(data)
+        // store.commit
+      })
+      .catch(() => {
+        Notify.create({
+          color: 'red',
+          position: 'bottom',
+          message: 'Erro de conexão',
+          icon: 'ion-ios-warning'
+        })
+        reject();
+      })
+      .finally(() => {
+        Loading.hide();
+      });
+  });
+}
+
