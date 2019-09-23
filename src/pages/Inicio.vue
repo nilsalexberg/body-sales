@@ -1,32 +1,28 @@
 <template>
   <div class="q-pa-md">
     Início
-    <form>
-      <div>
-        <q-select filled v-model="group" :options="groups" label="Grupo"
-        use-input input-debounce="0" @filter="filterGroup">
-          <template v-slot:no-option>
-            <q-item>
-              <q-item-section class="text-grey">
-                Sem resultados
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
-      </div>
-      <div>
-        <q-select filled v-model="description" :options="descriptions" label="Descrição"
-        use-input input-debounce="0" @filter="filterDescription">
-          <template v-slot:no-option>
-            <q-item>
-              <q-item-section class="text-grey">
-                Sem resultados
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
-      </div>
-    </form>
+    <div class="q-gutter-md">
+      <q-select filled v-model="group" :options="groups" label="Grupo"
+      use-input input-debounce="0" @filter="filterGroup">
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              Sem resultados
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+      <q-select filled v-model="description" :options="descriptions" label="Descrição"
+      use-input input-debounce="0" @filter="filterDescription">
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              Sem resultados
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+    </div>
   </div>
 </template>
 
@@ -49,7 +45,7 @@ export default {
   components: { QSelect },
   data () {
     return {
-      // os models deverão se tornar os mesmos valores dispatchados (enviados)
+      page: 0,
       group: null,
       description: null,
       groups: GROUP_OPTIONS,              /** grupo = Codigo_Grupo */
@@ -68,10 +64,10 @@ export default {
   // },
   watch: {
     group: function (val) {
-      return this.$store.dispatch('produtos/filtrar', {group: val, description: this.description})
+      return this.$store.dispatch('produtos/filtrar', {group: val, description: this.description, page: this.page})
     },
     description: function (val) {
-      return this.$store.dispatch('produtos/filtrar', {group: this.group, description: val})
+      return this.$store.dispatch('produtos/filtrar', {group: this.group, description: val, page: this.page})
     }
   },
   methods: {
