@@ -30,13 +30,13 @@ export function filtrar(store, params) {
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:8888/posseidom.php?op=ObterProdutosPG`, {
       Token: localStorage.getItem('token'),
-      pagina: 0,
+      pagina: params.page,
       grupo: params.group,
       descricao: params.description
     })
       .then(({ data }) => {
-        console.log(data)
-        // store.commit
+        // console.log(data)
+        store.commit('setProducts', data)
       })
       .catch(() => {
         Notify.create({

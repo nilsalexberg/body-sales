@@ -12,6 +12,7 @@
           </q-item>
         </template>
       </q-select>
+
       <q-select filled v-model="description" :options="descriptions" label="Descrição"
       use-input input-debounce="0" @filter="filterDescription">
         <template v-slot:no-option>
@@ -22,12 +23,35 @@
           </q-item>
         </template>
       </q-select>
+
+      <div v-for="product in products" :key="product.ID_Produto">
+        <q-card class="my-card">
+          <q-img :src="product.urlProduto">
+            <div class="absolute-bottom text-subtitle2 text-center">
+              {{ product.Produto_Descricao }}
+            </div>
+          </q-img>
+          <q-card-section>
+            <div class="text-h6">{{ description }}</div>
+            <div class="text-subtitle2">R$ {{ product.preco_venda }},00</div>
+          </q-card-section>
+          <q-card-section>
+            Disponível no estoque: {{ product.Saldo_Disponivel_Dominio }}
+          </q-card-section>
+          <q-card-actions align="around">
+            <q-btn flat round color="red" icon="add_shopping_cart" />
+            <q-btn flat round color="teal" icon="bookmark" />
+            <q-btn flat round color="primary" icon="share" />
+          </q-card-actions>
+        </q-card>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import { QSelect } from 'quasar'
+import { QSelect, QCard, QCardSection, QCardActions, QImg } from 'quasar'
 
 const GROUP_OPTIONS = [
   "INA", "2", "3", "4", "5", "6", "7", "9", "11", "12", "14", "16", "17", "18", "19",
@@ -42,32 +66,35 @@ const DESCRIPTION_OPTIONS = [
 ]
 
 export default {
-  components: { QSelect },
+  components: { QSelect, QCard, QCardSection, QCardActions, QImg },
   data () {
     return {
       page: 0,
-      group: null,
-      description: null,
+      group: 2,
+      products: ['Oi', 1],
+      description: "CREATINA",
       groups: GROUP_OPTIONS,              /** grupo = Codigo_Grupo */
       descriptions: DESCRIPTION_OPTIONS   /** descricao = Descricao_Grupo */
     }
   },
   mounted () {
+    this.$store.dispatch('produtos/filtrar', {group: this.group, description: this.description, page: this.page})
+    this.products = this.$store.getters.getProducts
+    console.log(this.products)
     /** produtos/filtrar: colocar aqui para retornar a busca padrão paginada na 1º pagina */
     // this.$store
     //   .dispatch('produtos/listar')
   },
-  // computed: {
-  //   products() {
-  //     return this.$store.dispatch('produtos/filtrar', {})
-  //   }
-  // },
   watch: {
     group: function (val) {
-      return this.$store.dispatch('produtos/filtrar', {group: val, description: this.description, page: this.page})
+      this.$store.dispatch('produtos/filtrar', {group: val, description: this.description, page: this.page})
+      this.products = this.$store.getters.getProducts
+      console.log(this.products)
     },
     description: function (val) {
-      return this.$store.dispatch('produtos/filtrar', {group: this.group, description: val, page: this.page})
+      this.$store.dispatch('produtos/filtrar', {group: this.group, description: val, page: this.page})
+      this.products = this.$store.getters.getProducts
+      console.log(this.products)
     }
   },
   methods: {

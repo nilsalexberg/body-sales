@@ -1,3 +1,4 @@
 export default {
-  lista: []
+  lista: [],
+  products: []
 }
