@@ -3,7 +3,7 @@
     Início
     <div class="q-gutter-md">
       <q-select filled v-model="group" :options="groups" label="Grupo"
-      use-input input-debounce="0" @filter="filterGroup">
+        use-input input-debounce="0" @filter="filterGroup" @input="getProductsByFilter">
         <template v-slot:no-option>
           <q-item>
             <q-item-section class="text-grey">
@@ -13,16 +13,8 @@
         </template>
       </q-select>
 
-      <q-select filled v-model="description" :options="descriptions" label="Descrição"
-      use-input input-debounce="0" @filter="filterDescription">
-        <template v-slot:no-option>
-          <q-item>
-            <q-item-section class="text-grey">
-              Sem resultados
-            </q-item-section>
-          </q-item>
-        </template>
-      </q-select>
+      <q-input filled v-model="description" label="Descrição"
+        use-input input-debounce="0" @input="getProductsByFilter" />
 
       <div v-for="product in products" :key="product.ID_Produto">
         <q-card class="my-card">
@@ -32,7 +24,7 @@
             </div>
           </q-img>
           <q-card-section>
-            <div class="text-h6">{{ description }}</div>
+            <div class="text-h6">{{ product.Produto_Descricao }}</div>
             <div class="text-subtitle2">R$ {{ product.preco_venda }},00</div>
           </q-card-section>
           <q-card-section>
@@ -57,13 +49,6 @@ const GROUP_OPTIONS = [
   "INA", "2", "3", "4", "5", "6", "7", "9", "11", "12", "14", "16", "17", "18", "19",
   "21", "22", "23", "24", "26", "27", "28", "29"
 ]
-const DESCRIPTION_OPTIONS = [
-  "ACESSÓRIO", "ALBUMINA", "AMINOACIDOS", "ARGININA", "BARRA", "BCAA", "BETA ALANINA",
-  "CASEINA", "COLAGENO", "CREATINA", "ENERGETICOS", "FITOTERAPICOS", "GH", "GLUTAMINA",
-  "GOURMET", "HIPERCALORICO", "INATIVO", "L-CARNITINA", "OLEO", "PACK", "PRÉ TREINO",
-  "PRO HORMONAL", "PROTEINAS", "ROUPAS", "SHAKE", "TERMOGENICO", "VITAMINAS/MINERAIS",
-  "WHEY", "ZMA"
-]
 
 export default {
   components: { QSelect, QCard, QCardSection, QCardActions, QImg },
@@ -71,36 +56,25 @@ export default {
     return {
       page: 0,
       group: 2,
-      products: ['Oi', 1],
-      description: "CREATINA",
+      description: "",
       groups: GROUP_OPTIONS,              /** grupo = Codigo_Grupo */
-      descriptions: DESCRIPTION_OPTIONS   /** descricao = Descricao_Grupo */
     }
   },
   mounted () {
     this.$store.dispatch('produtos/filtrar', {group: this.group, description: this.description, page: this.page})
-    this.products = this.$store.getters.getProducts
-    console.log(this.products)
-    /** produtos/filtrar: colocar aqui para retornar a busca padrão paginada na 1º pagina */
-    // this.$store
-    //   .dispatch('produtos/listar')
   },
-  watch: {
-    group: function (val) {
-      this.$store.dispatch('produtos/filtrar', {group: val, description: this.description, page: this.page})
-      this.products = this.$store.getters.getProducts
-      console.log(this.products)
-    },
-    description: function (val) {
-      this.$store.dispatch('produtos/filtrar', {group: this.group, description: val, page: this.page})
-      this.products = this.$store.getters.getProducts
-      console.log(this.products)
+  computed: {
+    products() {
+      return this.$store.getters['produtos/getProducts']
     }
   },
   methods: {
     getProductsByFilter() {
-      this.$store
-        .dispatch('produtos/filtrar', {})
+      this.$store.dispatch('produtos/filtrar', {
+        group: this.group,
+        description: this.description,
+        page: this.page
+      })
     },
     filterGroup (val, update) {
       if (val === '') {
@@ -112,18 +86,6 @@ export default {
       update(() => {
         const needle = val.toLowerCase()
         this.groups = GROUP_OPTIONS.filter(v => v.toLowerCase().indexOf(needle) > -1)
-      })
-    },
-    filterDescription (val, update) {
-      if (val === '') {
-        update(() => {
-          this.descriptions = DESCRIPTION_OPTIONS
-        })
-        return
-      }
-      update(() => {
-        const needle = val.toLowerCase()
-        this.descriptions = DESCRIPTION_OPTIONS.filter(v => v.toLowerCase().indexOf(needle) > -1)
       })
     }
   }
