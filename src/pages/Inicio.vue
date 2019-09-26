@@ -18,11 +18,7 @@
 
       <div v-for="product in products" :key="product.ID_Produto">
         <q-card class="my-card">
-          <q-img :src="product.urlProduto">
-            <div class="absolute-bottom text-subtitle2 text-center">
-              {{ product.Produto_Descricao }}
-            </div>
-          </q-img>
+          <q-img :src="product.urlProduto"></q-img>
           <q-card-section>
             <div class="text-h6">{{ product.Produto_Descricao }}</div>
             <div class="text-subtitle2">R$ {{ product.preco_venda }},00</div>
@@ -31,9 +27,7 @@
             Disponível no estoque: {{ product.Saldo_Disponivel_Dominio }}
           </q-card-section>
           <q-card-actions align="around">
-            <q-btn flat round color="red" icon="add_shopping_cart" />
-            <q-btn flat round color="teal" icon="bookmark" />
-            <q-btn flat round color="primary" icon="share" />
+            <q-btn flat round color="teal" icon="add_shopping_cart" />
           </q-card-actions>
         </q-card>
       </div>
@@ -61,7 +55,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('produtos/filtrar', {group: this.group, description: this.description, page: this.page})
+    this.getProductsByFilter()
   },
   computed: {
     products() {
