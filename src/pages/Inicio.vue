@@ -3,7 +3,7 @@
     Início
     <div class="q-gutter-md">
       <q-select filled v-model="group" :options="groups" label="Grupo"
-        use-input input-debounce="0" @filter="filterGroup" @input="getProductsByFilter">
+        use-input input-debounce="0" @input="getProductsByFilter">
         <template v-slot:no-option>
           <q-item>
             <q-item-section class="text-grey">
@@ -39,49 +39,47 @@
 <script>
 import { QSelect, QCard, QCardSection, QCardActions, QImg } from 'quasar'
 
-const GROUP_OPTIONS = [
-  "INA", "2", "3", "4", "5", "6", "7", "9", "11", "12", "14", "16", "17", "18", "19",
-  "21", "22", "23", "24", "26", "27", "28", "29"
-]
-
 export default {
   components: { QSelect, QCard, QCardSection, QCardActions, QImg },
   data () {
     return {
       page: 0,
-      group: 2,
+      group: {Codigo_Grupo: 6, Descricao: "ACESSÓRIO", urlGrupo: null},
       description: "",
-      groups: GROUP_OPTIONS,              /** grupo = Codigo_Grupo */
     }
   },
   mounted () {
     this.getProductsByFilter()
+    this.$store.dispatch('produtos/obterGrupos', {})
   },
   computed: {
     products() {
       return this.$store.getters['produtos/getProducts']
+    },
+    groups() {
+      return this.$store.getters['produtos/getGroups']
     }
   },
   methods: {
     getProductsByFilter() {
       this.$store.dispatch('produtos/filtrar', {
-        group: this.group,
+        group: this.group.Codigo_Grupo,
         description: this.description,
         page: this.page
       })
     },
-    filterGroup (val, update) {
-      if (val === '') {
-        update(() => {
-          this.groups = GROUP_OPTIONS
-        })
-        return
-      }
-      update(() => {
-        const needle = val.toLowerCase()
-        this.groups = GROUP_OPTIONS.filter(v => v.toLowerCase().indexOf(needle) > -1)
-      })
-    }
+    // filterGroup (val, update) {
+    //   if (val === '') {
+    //     update(() => {
+    //       this.groups = GROUP_OPTIONS
+    //     })
+    //     return
+    //   }
+    //   update(() => {
+    //     const needle = val.toLowerCase()
+    //     this.groups = GROUP_OPTIONS.filter(v => v.toLowerCase().indexOf(needle) > -1)
+    //   })
+    // }
   }
 }
 </script>

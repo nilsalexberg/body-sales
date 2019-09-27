@@ -4,5 +4,8 @@ export function setLista(state, lista) {
 
 export function setProducts(state, payload) {
   state.products = payload
-  // console.log(state.products)
+}
+
+export function setGroups(state, payload) {
+  state.groups = payload
 }

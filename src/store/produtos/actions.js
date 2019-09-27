@@ -53,3 +53,25 @@ export function filtrar(store, params) {
   });
 }
 
+export function obterGrupos(store) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:8888/posseidom.php?op=ObterGruposProdutos`, {
+      Token: localStorage.getItem('token'),
+    })
+      .then(({ data }) => {
+        store.commit('setGroups', data)
+      })
+      .catch(() => {
+        Notify.create({
+          color: 'red',
+          position: 'bottom',
+          message: 'Erro de conexão',
+          icon: 'ion-ios-warning'
+        })
+        reject();
+      })
+      .finally(() => {
+        // console.log(data)
+      });
+  })
+}
