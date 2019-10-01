@@ -26,7 +26,7 @@ export function listar(store) {
 }
 
 export function filtrar(store, params) {
-  Loading.show();
+  // Loading.show();
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:8888/posseidom.php?op=ObterProdutosPG`, {
       Token: localStorage.getItem('token'),
@@ -36,7 +36,10 @@ export function filtrar(store, params) {
     })
       .then(({ data }) => {
         // console.log(data)
-        store.commit('setProducts', data)
+        if(params.page < 2)
+          store.commit('setProducts', data)
+        else
+          store.commit('setPaginateProducts', data)
       })
       .catch(() => {
         Notify.create({
@@ -48,7 +51,7 @@ export function filtrar(store, params) {
         reject();
       })
       .finally(() => {
-        Loading.hide();
+        // Loading.hide();
       });
   });
 }
