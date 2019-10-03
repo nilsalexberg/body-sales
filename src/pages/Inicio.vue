@@ -85,14 +85,15 @@ export default {
       })
     },
     onLoad (index, done, stop) {
-      this.page = index
       setTimeout(() => {
         if (this.products) {
-          this.getProductsByPagination(index)
-          console.log(index)
+          this.getProductsByPagination(this.page)
+          console.log(this.page)
+          this.page += 1
           done()
         }
       }, 2000)
+
     }
     // filterGroup (val, update) {
     //   if (val === '') {
