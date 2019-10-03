@@ -2,23 +2,22 @@
   <div class="q-pa-md">
     Início
     <div class="q-gutter-md">
+      <q-select filled v-model="group" :options="groups" label="Grupo"
+        option-value="Codigo_Grupo" option-label="Descricao"
+        use-input input-debounce="0" @input="getProductsByFilter">
+        <template v-slot:no-option>
+          <q-item>
+            <q-item-section class="text-grey">
+              Sem resultados
+            </q-item-section>
+          </q-item>
+        </template>
+      </q-select>
+
+      <q-input filled v-model="description" label="Descrição"
+        use-input input-debounce="0" @input="getProductsByFilter" />
+
       <q-infinite-scroll @load="onLoad">
-
-        <q-select filled v-model="group" :options="groups" label="Grupo"
-          option-value="Codigo_Grupo" option-label="Descricao"
-          use-input input-debounce="0" @input="getProductsByFilter">
-          <template v-slot:no-option>
-            <q-item>
-              <q-item-section class="text-grey">
-                Sem resultados
-              </q-item-section>
-            </q-item>
-          </template>
-        </q-select>
-
-        <q-input filled v-model="description" label="Descrição"
-          use-input input-debounce="0" @input="getProductsByFilter" />
-
         <div v-for="(product, index) in products" :key="index">
           <q-card class="my-card">
             <q-img :src="product.urlProduto"></q-img>
@@ -40,7 +39,6 @@
             <q-spinner-dots color="primary" size="40px"></q-spinner-dots>
           </div>
         </template>
-
       </q-infinite-scroll>
     </div>
   </div>
@@ -59,7 +57,7 @@ export default {
     }
   },
   mounted () {
-    this.getProductsByFilter()
+    // this.getProductsByFilter()
     this.$store.dispatch('produtos/obterGrupos', {})
   },
   computed: {
@@ -72,18 +70,26 @@ export default {
   },
   methods: {
     getProductsByFilter() {
+      this.page = 1
       this.$store.dispatch('produtos/filtrar', {
         group: this.group.Codigo_Grupo,
         description: this.description,
         page: this.page
       })
     },
+    getProductsByPagination(pagination) {
+      this.$store.dispatch('produtos/filtrar', {
+        group: this.group.Codigo_Grupo,
+        description: this.description,
+        page: pagination
+      })
+    },
     onLoad (index, done, stop) {
-      this.page = index+1
+      this.page = index
       setTimeout(() => {
         if (this.products) {
-          this.getProductsByFilter()
-          console.log(this.page)
+          this.getProductsByPagination(index)
+          console.log(index)
           done()
         }
       }, 2000)
