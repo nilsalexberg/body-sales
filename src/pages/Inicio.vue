@@ -17,7 +17,7 @@
       <q-input filled v-model="description" label="Descrição"
         use-input input-debounce="0" @input="getProductsByFilter" />
 
-      <q-infinite-scroll @load="onLoad">
+      <q-infinite-scroll @load="onLoadProducts">
         <div v-for="(product, index) in products" :key="index">
           <q-card class="my-card">
             <q-img :src="product.urlProduto"></q-img>
@@ -84,7 +84,7 @@ export default {
         page: pagination
       })
     },
-    onLoad (index, done, stop) {
+    onLoadProducts (index, done, stop) {
       setTimeout(() => {
         if (this.products) {
           this.getProductsByPagination(this.page)
@@ -92,7 +92,7 @@ export default {
           this.page += 1
           done()
         }
-      }, 2000)
+      }, 3500)
 
     }
     // filterGroup (val, update) {
