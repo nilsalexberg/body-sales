@@ -52,7 +52,7 @@ export default {
   data () {
     return {
       page: 1,
-      group: {Codigo_Grupo: 6, Descricao: "ACESSÓRIO", urlGrupo: null},
+      group: {Codigo_Grupo: 6, Descricao: "ALBUMINA", urlGrupo: null},
       description: "",
     }
   },
