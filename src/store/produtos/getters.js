@@ -7,6 +7,11 @@ export function getGroups(state) {
   return state.groups
 }
 
+export function getProductsCount(state) {
+  // console.log(state.productsCount)
+  return state.productsCount
+}
+
 // export function getGroupsId(state) {
 //   return state.groups.filter(group => group.Codigo_Grupo)
 // }

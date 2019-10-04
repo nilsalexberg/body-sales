@@ -4,9 +4,14 @@ export function setLista(state, lista) {
 
 export function setProducts(state, payload) {
   state.products = payload
+  state.remainedProductsCount = payload.length
 }
 
-export function setPaginateProducts(state, payload) {
+export function setProductsCount(state, payload) {
+  state.productsCount = payload
+}
+
+export function paginateProducts(state, payload) {
   state.products = [ ...state.products, ...payload]
 }
 

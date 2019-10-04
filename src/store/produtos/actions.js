@@ -8,7 +8,7 @@ export function listar(store) {
       Token: localStorage.getItem('token'),
     })
       .then(({ data }) => {
-        console.log(data)
+
       })
       .catch(() => {
         Notify.create({
@@ -35,11 +35,13 @@ export function filtrar(store, params) {
       descricao: params.description
     })
       .then(({ data }) => {
-        // console.log(data)
-        if(params.page < 2)
-          store.commit('setProducts', data)
-        else
-          store.commit('setPaginateProducts', data)
+        store.commit('setProductsCount', data.length)
+        // if(data.length > 0) {
+          if(params.page < 2)
+            store.commit('setProducts', data)
+          else
+            store.commit('paginateProducts', data)
+        // }
       })
       .catch(() => {
         Notify.create({
@@ -74,7 +76,7 @@ export function obterGrupos(store) {
         reject();
       })
       .finally(() => {
-        // console.log(data)
+
       });
   })
 }

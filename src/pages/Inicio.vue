@@ -36,7 +36,7 @@
 
         <template v-slot:loading>
           <div class="row justify-center q-my-md">
-            <q-spinner-dots color="primary" size="40px"></q-spinner-dots>
+            <q-spinner-dots v-if="productsCount > 0" color="primary" size="40px"></q-spinner-dots>
           </div>
         </template>
       </q-infinite-scroll>
@@ -66,6 +66,9 @@ export default {
     },
     groups() {
       return this.$store.getters['produtos/getGroups']
+    },
+    productsCount() {
+      return this.$store.getters['produtos/getProductsCount']
     }
   },
   methods: {
@@ -84,16 +87,14 @@ export default {
         page: pagination
       })
     },
-    onLoadProducts (index, done, stop) {
-      setTimeout(() => {
-        if (this.products) {
+    onLoadProducts (index, done) {
+      // if(this.productsCount > 0) {
+        setTimeout(() => {
           this.getProductsByPagination(this.page)
-          console.log(this.page)
           this.page += 1
           done()
-        }
-      }, 3500)
-
+        }, 3000)
+      // }
     }
     // filterGroup (val, update) {
     //   if (val === '') {
