@@ -29,7 +29,7 @@
               Disponível no estoque: {{ product.Saldo_Disponivel_Dominio }}
             </q-card-section>
             <q-card-actions align="around">
-              <q-btn flat round color="teal" icon="add_shopping_cart" />
+              <q-btn flat round color="teal" icon="add_shopping_cart" @click="addToCart(product)" />
             </q-card-actions>
           </q-card>
         </div>
@@ -96,6 +96,9 @@ export default {
           done()
         }, 3000)
       // }
+    },
+    addToCart (product) {
+      this.$store.dispatch('produtos/adicionarNoCarrinho', product)
     }
     // filterGroup (val, update) {
     //   if (val === '') {

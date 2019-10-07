@@ -109,5 +109,5 @@ export function paginar(store, params) {
 }
 
 export function adicionarNoCarrinho(store, params) {
-
+  store.commit('addToShoppingCart', params)
 }

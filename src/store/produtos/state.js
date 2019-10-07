@@ -2,5 +2,6 @@ export default {
   groups: [],
   lista: [],
   products: [],
-  productsCount: 1
+  productsCount: 1,
+  shoppingCart: []
 }

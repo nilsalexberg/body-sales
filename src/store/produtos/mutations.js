@@ -18,3 +18,8 @@ export function setProductsCount(state, payload) {
 export function paginateProducts(state, payload) {
   state.products = [ ...state.products, ...payload]
 }
+
+export function addToShoppingCart(state, payload) {
+  state.shoppingCart.push(payload)
+  console.log(state.shoppingCart)
+}
