@@ -107,3 +107,7 @@ export function paginar(store, params) {
       });
   });
 }
+
+export function adicionarNoCarrinho(store, params) {
+
+}
