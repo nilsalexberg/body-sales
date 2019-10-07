@@ -17,9 +17,9 @@
       <q-input filled v-model="description" label="Descrição"
         use-input input-debounce="0" @input="getProductsByFilter" />
 
-      <q-infinite-scroll @load="onLoadProducts">
-        <div v-for="(product, index) in products" :key="index">
-          <q-card class="my-card">
+      <q-infinite-scroll @load="onLoadProducts" class="q-mt-md">
+        <div v-for="(product, index) in products" :key="index" class="q-gutter-x-xs">
+          <q-card class="my-card" style="margin-bottom: 1rem">
             <q-img :src="product.urlProduto"></q-img>
             <q-card-section>
               <div class="text-h6">{{ product.Produto_Descricao }}</div>
