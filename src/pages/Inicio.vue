@@ -52,9 +52,9 @@ export default {
   components: { QSelect, QCard, QCardSection, QCardActions, QImg, QInfiniteScroll, QSpinnerTail, QTooltip },
   data () {
     return {
-      page: 1,
       group: {Codigo_Grupo: 13, Descricao: "ALBUMINA", urlGrupo: null},
       description: "",
+      page: 1,
     }
   },
   mounted () {
@@ -62,11 +62,11 @@ export default {
     this.$store.dispatch('produtos/obterGrupos', {})
   },
   computed: {
-    products() {
-      return this.$store.getters['produtos/getProducts']
-    },
     groups() {
       return this.$store.getters['produtos/getGroups']
+    },
+    products() {
+      return this.$store.getters['produtos/getProducts']
     },
     productsCount() {
       return this.$store.getters['produtos/getProductsCount']

@@ -1,3 +1,7 @@
+export function setGroups(state, payload) {
+  state.groups = payload
+}
+
 export function setLista(state, lista) {
   state.lista = lista
 }
@@ -13,8 +17,4 @@ export function setProductsCount(state, payload) {
 
 export function paginateProducts(state, payload) {
   state.products = [ ...state.products, ...payload]
-}
-
-export function setGroups(state, payload) {
-  state.groups = payload
 }

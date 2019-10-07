@@ -1,6 +1,6 @@
 export default {
+  groups: [],
   lista: [],
   products: [],
-  groups: [],
   productsCount: 1
 }
