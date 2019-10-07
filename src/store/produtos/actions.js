@@ -26,7 +26,7 @@ export function listar(store) {
 }
 
 export function filtrar(store, params) {
-  // Loading.show();
+  Loading.show();
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:8888/posseidom.php?op=ObterProdutosPG`, {
       Token: localStorage.getItem('token'),
@@ -36,12 +36,39 @@ export function filtrar(store, params) {
     })
       .then(({ data }) => {
         store.commit('setProductsCount', data.length)
-        // if(data.length > 0) {
+        store.commit('setProducts', data)
+      })
+      .catch(() => {
+        Notify.create({
+          color: 'red',
+          position: 'bottom',
+          message: 'Erro de conexão',
+          icon: 'ion-ios-warning'
+        })
+        reject();
+      })
+      .finally(() => {
+        Loading.hide();
+      });
+  });
+}
+
+export function paginar(store, params) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:8888/posseidom.php?op=ObterProdutosPG`, {
+      Token: localStorage.getItem('token'),
+      pagina: params.page,
+      grupo: params.group,
+      descricao: params.description
+    })
+      .then(({ data }) => {
+        store.commit('setProductsCount', data.length)
+        if(data.length > 0) {
           if(params.page < 2)
             store.commit('setProducts', data)
           else
             store.commit('paginateProducts', data)
-        // }
+        }
       })
       .catch(() => {
         Notify.create({

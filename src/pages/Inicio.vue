@@ -35,8 +35,9 @@
         </div>
 
         <template v-slot:loading>
-          <div class="row justify-center q-my-md">
-            <q-spinner-dots v-if="productsCount > 0" color="primary" size="40px"></q-spinner-dots>
+          <div v-if="productsCount > 0" class="row justify-center q-my-md">
+            <q-spinner-tail color="primary" size="40px"></q-spinner-tail>
+            <q-tooltip :offset="[0, 8]">Verificando mais produtos para carregar</q-tooltip>
           </div>
         </template>
       </q-infinite-scroll>
@@ -45,10 +46,10 @@
 </template>
 
 <script>
-import { QSelect, QCard, QCardSection, QCardActions, QImg, QInfiniteScroll, QSpinnerDots } from 'quasar'
+import { QSelect, QCard, QCardSection, QCardActions, QImg, QInfiniteScroll, QSpinnerTail, QTooltip } from 'quasar'
 
 export default {
-  components: { QSelect, QCard, QCardSection, QCardActions, QImg, QInfiniteScroll, QSpinnerDots },
+  components: { QSelect, QCard, QCardSection, QCardActions, QImg, QInfiniteScroll, QSpinnerTail, QTooltip },
   data () {
     return {
       page: 1,
@@ -81,7 +82,7 @@ export default {
       })
     },
     getProductsByPagination(pagination) {
-      this.$store.dispatch('produtos/filtrar', {
+      this.$store.dispatch('produtos/paginar', {
         group: this.group.Codigo_Grupo,
         description: this.description,
         page: pagination
