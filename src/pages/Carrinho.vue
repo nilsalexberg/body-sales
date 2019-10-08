@@ -20,6 +20,9 @@
           -->
         </q-card>
       </div>
+      <div class="q-gutter-x">
+        <q-btn class="full-width q-gutter-x-xs" label="Enviar pedido" color="accent" @click="sendOrder()" />
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +41,11 @@ export default {
   computed: {
     shoppingCart() {
       return this.$store.getters['produtos/getShoppingCart']
+    }
+  },
+  methods: {
+    sendOrder () {
+      this.$store.dispatch('produtos/enviarPedidos', this.shoppingCart)
     }
   }
 }

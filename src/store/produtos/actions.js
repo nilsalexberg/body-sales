@@ -128,7 +128,6 @@ export function enviarPedidos(store, params) {
       .then(({ data }) => {
         /** limpar o carrinho
          *  enviar uma notificação de sucesso do envio */
-        store.commit('setProductsCount', data.length)
         store.commit('setProducts', data)
       })
       .catch(() => {
