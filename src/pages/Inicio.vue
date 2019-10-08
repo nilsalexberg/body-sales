@@ -41,15 +41,24 @@
           </div>
         </template>
       </q-infinite-scroll>
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-btn to="/carrinho" fab icon="shopping_cart" color="accent" />
+      </q-page-sticky>
     </div>
   </div>
 </template>
 
 <script>
-import { QSelect, QCard, QCardSection, QCardActions, QImg, QInfiniteScroll, QSpinnerTail, QTooltip } from 'quasar'
+import {
+  QSelect, QCard, QCardSection, QCardActions, QImg,
+  QInfiniteScroll, QSpinnerTail, QTooltip, QPageSticky
+  } from 'quasar'
 
 export default {
-  components: { QSelect, QCard, QCardSection, QCardActions, QImg, QInfiniteScroll, QSpinnerTail, QTooltip },
+  components: {
+    QSelect, QCard, QCardSection, QCardActions, QImg,
+    QInfiniteScroll, QSpinnerTail, QTooltip, QPageSticky
+  },
   data () {
     return {
       group: {Codigo_Grupo: 13, Descricao: "ALBUMINA", urlGrupo: null},

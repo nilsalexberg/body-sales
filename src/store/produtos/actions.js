@@ -110,4 +110,44 @@ export function paginar(store, params) {
 
 export function adicionarNoCarrinho(store, params) {
   store.commit('addToShoppingCart', params)
+  Notify.create({
+    color: 'green',
+    position: 'bottom',
+    message: 'Produto adicionado no carrinho com sucesso',
+    icon: 'ion-ios-checkmark'
+  })
+}
+
+export function enviarPedidos(store, params) {
+  Loading.show();
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:8888/posseidom.php?op=EnviarPedidosJSON`, {
+      Token: localStorage.getItem('token'),
+      PedidosJSON: params
+    })
+      .then(({ data }) => {
+        /** limpar o carrinho
+         *  enviar uma notificação de sucesso do envio */
+        store.commit('setProductsCount', data.length)
+        store.commit('setProducts', data)
+      })
+      .catch(() => {
+        Notify.create({
+          color: 'red',
+          position: 'bottom',
+          message: 'Erro de conexão',
+          icon: 'ion-ios-warning'
+        })
+        reject();
+      })
+      .finally(() => {
+        Loading.hide();
+        Notify.create({
+          color: 'green',
+          position: 'bottom',
+          message: 'Seu pedido foi enviado :)',
+          icon: 'ion-ios-checkmark'
+        })
+      });
+  });
 }

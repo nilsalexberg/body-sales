@@ -7,7 +7,7 @@
           :icon="$route.meta.hasBackButton ? 'ion-ios-arrow-back' : ''"
           round flat dense
           @click="$route.meta.hasBackButton && $router.go(-1)"/>
-        
+
         <q-toolbar-title class="text-center">
           <strong>{{ $route.meta.title }}</strong>
         </q-toolbar-title>
@@ -31,7 +31,7 @@
       content-class="bg-grey-2">
       <q-list class="text-grey-8">
         <q-item-label header overline class="text-uppercase">Menu</q-item-label>
-        
+
         <q-item clickable to="/inicio">
           <q-item-section avatar>
             <q-icon name="ion-ios-home" />
@@ -41,39 +41,12 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable to="/ranking">
+        <q-item clickable to="/carrinho">
           <q-item-section avatar>
-            <q-icon name="ion-ios-trophy" />
+            <q-icon name="ion-ios-cart" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Ranking</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable to="/palpites">
-          <q-item-section avatar>
-            <q-icon name="ion-ios-clipboard" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Palpites</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable to="/grupos">
-          <q-item-section avatar>
-            <q-icon name="ion-ios-people" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Grupos</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item clickable to="/regulamento">
-          <q-item-section avatar>
-            <q-icon name="ion-ios-information-circle-outline" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Regulamento</q-item-label>
+            <q-item-label>Carrinho</q-item-label>
           </q-item-section>
         </q-item>
 
