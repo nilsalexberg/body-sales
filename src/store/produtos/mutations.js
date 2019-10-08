@@ -23,3 +23,7 @@ export function addToShoppingCart(state, payload) {
   state.shoppingCart.push(payload)
   console.log(state.shoppingCart)
 }
+
+export function cleanShoppingCart(state) {
+  state.shoppingCart = []
+}

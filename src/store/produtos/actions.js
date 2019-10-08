@@ -126,9 +126,7 @@ export function enviarPedidos(store, params) {
       PedidosJSON: params
     })
       .then(({ data }) => {
-        /** limpar o carrinho
-         *  enviar uma notificação de sucesso do envio */
-        store.commit('setProducts', data)
+        store.commit('cleanShoppingCart')
       })
       .catch(() => {
         Notify.create({
