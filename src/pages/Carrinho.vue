@@ -13,12 +13,11 @@
             <q-card-section>
               Disponível no estoque: {{ product.Saldo_Disponivel_Dominio }}
             </q-card-section>
-            <!--
             <q-card-actions align="around">
-              <q-btn flat round color="negative" icon="remove_circle" />
-              <q-btn flat round color="secondary" icon="add_circle" />
+              <q-btn flat round color="negative" icon="remove_circle" @click="removeFromCart(index)" />
+              <!-- <p>Index: {{ index }}</p> -->
+              <q-btn flat round color="secondary" icon="add_circle" @click="addToCart(product)" />
             </q-card-actions>
-            -->
           </q-card>
         </div>
       </div>
@@ -59,6 +58,12 @@ export default {
   methods: {
     sendOrder () {
       this.$store.dispatch('produtos/enviarPedidos', this.shoppingCart)
+    },
+    addToCart (product) {
+      this.$store.dispatch('produtos/adicionarNoCarrinho', product)
+    },
+    removeFromCart (index) {
+      this.$store.dispatch('produtos/removerDoCarrinho', index)
     }
   }
 }

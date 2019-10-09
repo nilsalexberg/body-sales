@@ -118,6 +118,10 @@ export function adicionarNoCarrinho(store, params) {
   })
 }
 
+export function removerDoCarrinho(store, params) {
+  store.commit('removeFromShoppingCart', params)
+}
+
 export function enviarPedidos(store, params) {
   Loading.show();
   return new Promise((resolve, reject) => {

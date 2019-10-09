@@ -24,6 +24,11 @@ export function addToShoppingCart(state, payload) {
   console.log(state.shoppingCart)
 }
 
+export function removeFromShoppingCart(state, payload) {
+  state.shoppingCart.splice(payload, 1)
+  console.log(state.shoppingCart)
+}
+
 export function cleanShoppingCart(state) {
   state.shoppingCart = []
 }
