@@ -15,7 +15,7 @@
             </q-card-section>
             <q-card-actions align="around">
               <q-btn flat round color="negative" icon="remove_circle" @click="removeFromCart(index)" />
-              <!-- <p>Index: {{ index }}</p> -->
+              <p>Index: {{ index }}</p>
               <q-btn flat round color="secondary" icon="add_circle" @click="addToCart(product)" />
             </q-card-actions>
           </q-card>

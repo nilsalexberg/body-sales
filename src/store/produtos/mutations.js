@@ -22,6 +22,8 @@ export function paginateProducts(state, payload) {
 export function addToShoppingCart(state, payload) {
   state.shoppingCart.push(payload)
   console.log(state.shoppingCart)
+  state.shoppingCart.sort(function(a, b) {return a.ID_Produto - b.ID_Produto})
+  console.log(state.shoppingCart)
 }
 
 export function removeFromShoppingCart(state, payload) {
