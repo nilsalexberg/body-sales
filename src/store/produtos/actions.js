@@ -113,7 +113,7 @@ export function adicionarNoCarrinho(store, params) {
   Notify.create({
     color: 'green',
     position: 'bottom',
-    message: 'Produto adicionado no carrinho com sucesso',
+    message: 'Produto adicionado no carrinho',
     icon: 'ion-ios-checkmark'
   })
 }

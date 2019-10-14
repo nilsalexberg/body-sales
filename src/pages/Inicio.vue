@@ -14,30 +14,29 @@
         </template>
       </q-select>
 
-      <q-input filled v-model="description" label="Descrição"
+      <q-input filled v-model="description" label="Descrição" placeholder="Busca na Body"
         use-input input-debounce="0" @input="getProductsByFilter" />
 
-      <q-infinite-scroll @load="onLoadProducts" class="q-mt-md">
-        <div v-for="(product, index) in products" :key="index" class="q-gutter-x-xs">
-          <q-card class="my-card" style="margin-bottom: 1rem">
+      <q-infinite-scroll @load="onLoadProducts" class="q-mt-md row">
+        <div v-for="(product, index) in products" :key="index" class="q-gutter-xs-xs col-12">
+          <q-card class="my-card">
+            <q-card-actions align="right">
+              <q-btn flat round color="teal" icon="add_shopping_cart" @click="addToCart(product)" />
+            </q-card-actions>
             <q-img :src="product.urlProduto"></q-img>
             <q-card-section>
-              <div class="text-h6">{{ product.Produto_Descricao }}</div>
+              <div class="text-h7">{{ product.Produto_Descricao }}</div>
               <div class="text-subtitle2">R$ {{ product.preco_venda }},00</div>
             </q-card-section>
             <q-card-section>
-              Disponível no estoque: {{ product.Saldo_Disponivel_Dominio }}
+              <div class="text-caption">Disponível no estoque: {{ product.Saldo_Disponivel_Dominio }}</div>
             </q-card-section>
-            <q-card-actions align="around">
-              <q-btn flat round color="teal" icon="add_shopping_cart" @click="addToCart(product)" />
-            </q-card-actions>
           </q-card>
         </div>
 
         <template v-slot:loading>
-          <div v-if="productsCount > 0" class="row justify-center q-my-md">
-            <q-spinner-tail color="primary" size="40px"></q-spinner-tail>
-            <q-tooltip :offset="[0, 8]">Verificando mais produtos para carregar</q-tooltip>
+          <div v-if="productsCount > 0" class="fixed-center">
+            <q-spinner color="grey" size="6em"></q-spinner>
           </div>
         </template>
       </q-infinite-scroll>
@@ -51,13 +50,13 @@
 <script>
 import {
   QSelect, QCard, QCardSection, QCardActions, QImg,
-  QInfiniteScroll, QSpinnerTail, QTooltip, QPageSticky
+  QInfiniteScroll, QSpinner, QTooltip, QPageSticky
   } from 'quasar'
 
 export default {
   components: {
     QSelect, QCard, QCardSection, QCardActions, QImg,
-    QInfiniteScroll, QSpinnerTail, QTooltip, QPageSticky
+    QInfiniteScroll, QSpinner, QTooltip, QPageSticky
   },
   data () {
     return {
@@ -124,3 +123,14 @@ export default {
   }
 }
 </script>
+<style>
+.my-card {
+  width: 95%;
+  margin-left: 0.55rem;
+  margin-bottom: 1rem;
+  height: auto;
+}
+/* .q-img {
+  min-height: 181.44px;
+} */
+</style>
