@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md">
-    Início
     <div class="q-gutter-md">
       <q-select filled v-model="group" :options="groups" label="Grupo"
         option-value="Codigo_Grupo" option-label="Descricao"
@@ -23,7 +22,7 @@
             <q-card-actions align="right">
               <q-btn flat round color="teal" icon="add_shopping_cart" @click="addToCart(product)" />
             </q-card-actions>
-            <q-img :src="product.urlProduto"></q-img>
+            <q-img class="card-img" :src="product.urlProduto"></q-img>
             <q-card-section>
               <div class="text-h7">{{ product.Produto_Descricao }}</div>
               <div class="text-subtitle2">R$ {{ product.preco_venda }},00</div>
@@ -40,9 +39,9 @@
           </div>
         </template>
       </q-infinite-scroll>
-      <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-btn to="/carrinho" fab icon="shopping_cart" color="accent" />
-      </q-page-sticky>
+      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+        <q-btn fab icon="keyboard_arrow_up" color="accent" />
+      </q-page-scroller>
     </div>
   </div>
 </template>
@@ -50,13 +49,13 @@
 <script>
 import {
   QSelect, QCard, QCardSection, QCardActions, QImg,
-  QInfiniteScroll, QSpinner, QTooltip, QPageSticky
+  QInfiniteScroll, QSpinner, QTooltip, QPageScroller
   } from 'quasar'
 
 export default {
   components: {
     QSelect, QCard, QCardSection, QCardActions, QImg,
-    QInfiniteScroll, QSpinner, QTooltip, QPageSticky
+    QInfiniteScroll, QSpinner, QTooltip, QPageScroller
   },
   data () {
     return {
@@ -130,7 +129,11 @@ export default {
   margin-bottom: 1rem;
   height: auto;
 }
-/* .q-img {
-  min-height: 181.44px;
-} */
+.card-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  /* min-height: 181.44px; */
+}
 </style>

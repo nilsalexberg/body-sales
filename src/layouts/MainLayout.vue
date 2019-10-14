@@ -1,38 +1,47 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header class="bg-red" elevated>
       <q-toolbar>
         <q-btn
-          :style="$route.meta.hasBackButton ? '' : 'visibility:hidden;'"
-          :icon="$route.meta.hasBackButton ? 'ion-ios-arrow-back' : ''"
-          round flat dense
-          @click="$route.meta.hasBackButton && $router.go(-1)"/>
+          flat
+          dense
+          round
+          @click="$route.name == 'Inicio' ? leftDrawerOpen = !leftDrawerOpen : $router.go(-1)"
+          aria-label="Menu"
+        >
+          <q-icon :name="$route.name == 'Inicio' ? 'fas fa-bars' : 'fas fa-arrow-left'" />
+        </q-btn>
 
         <q-toolbar-title class="text-center">
-          <strong>{{ $route.meta.title }}</strong>
+          <strong>{{ $route.name }}</strong>
         </q-toolbar-title>
 
         <q-btn
           flat
           dense
           round
-          @click="rightDrawerOpen = !rightDrawerOpen"
+          to="/carrinho"
           aria-label="Menu"
         >
-          <q-icon name="fas fa-bars" />
+          <q-icon name="fas fa-shopping-cart" />
         </q-btn>
+        <!-- <q-btn
+          :style="$route.meta.hasBackButton ? '' : 'visibility:hidden;'"
+          :icon="$route.meta.hasBackButton ? 'ion-ios-arrow-back' : ''"
+          round flat dense
+          @click="$route.meta.hasBackButton && $router.go(-1)"/> -->
       </q-toolbar>
     </q-header>
 
     <q-drawer
-      v-model="rightDrawerOpen"
-      side="right"
+      v-model="leftDrawerOpen"
+      side="left"
       bordered
       content-class="bg-grey-2">
       <q-list class="text-grey-8">
         <q-item-label header overline class="text-uppercase">Menu</q-item-label>
 
-        <q-item clickable to="/inicio">
+        <q-item clickable to="/inicio" active-class="text-red">
           <q-item-section avatar>
             <q-icon name="ion-ios-home" />
           </q-item-section>
@@ -41,7 +50,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable to="/carrinho">
+        <q-item clickable to="/carrinho" active-class="text-red">
           <q-item-section avatar>
             <q-icon name="ion-ios-cart" />
           </q-item-section>
@@ -50,7 +59,7 @@
           </q-item-section>
         </q-item>
 
-        <q-item clickable to="/conta">
+        <q-item clickable to="/conta" active-class="text-red">
           <q-item-section avatar>
             <q-icon name="ion-ios-contact" />
           </q-item-section>
@@ -79,9 +88,12 @@ export default {
   name: 'MainLayout',
   data () {
     return {
-      rightDrawerOpen: this.$q.platform.is.desktop,
+      leftDrawerOpen: this.$q.platform.is.desktop,
       transition: {enter: 'fadeInUp', leave: 'fadeOutUp'}
     }
+  },
+  mounted () {
+    console.log(this.$route.meta)
   },
   watch: {
     '$route' (to, from) {
