@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md">
-    Carrinho
     <div class="q-gutter-md">
       <div v-if="shoppingCart.length > 0">
         <div v-for="(product, index) in shoppingCart" :key="index" class="q-gutter-x-xs">
@@ -22,7 +21,7 @@
         </div>
       </div>
       <div v-else>
-        <q-banner class="bg-grey-3">
+        <q-banner class="bg-transparent-3">
           <template v-slot:avatar>
             <q-icon name="remove_shopping_cart" color="grey" />
           </template>
