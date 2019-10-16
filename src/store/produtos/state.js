@@ -4,5 +4,6 @@ export default {
   products: [],
   productsCount: 1,
   shoppingCart: [],
+  qtdShoppingCart: [],
   productDetails: {}
 }

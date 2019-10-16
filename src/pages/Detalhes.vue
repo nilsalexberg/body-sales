@@ -42,9 +42,6 @@ export default {
     }
   },
   methods: {
-    sendOrder () {
-      this.$store.dispatch('produtos/enviarPedidos', this.shoppingCart)
-    },
     addToCart (product, quantity) {
       for(let i = 0; i < quantity; i++)
         this.$store.dispatch('produtos/adicionarNoCarrinho', product)

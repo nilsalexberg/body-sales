@@ -20,6 +20,10 @@ export function getShoppingCart(state) {
   return state.shoppingCart
 }
 
+export function getQtdShoppingCart(state) {
+  return state.qtdShoppingCart
+}
+
 // export function getGroupsId(state) {
 //   return state.groups.filter(group => group.Codigo_Grupo)
 // }

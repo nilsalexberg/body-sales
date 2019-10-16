@@ -115,10 +115,12 @@ export function detalharProduto(store, param) {
 
 export function adicionarNoCarrinho(store, params) {
   store.commit('addToShoppingCart', params)
+  store.commit('addQuantityShoppingCart', params)
 }
 
 export function removerDoCarrinho(store, params) {
   store.commit('removeFromShoppingCart', params)
+  store.commit('removeQuantityShoppingCart', params)
 }
 
 export function enviarPedidos(store, params) {
