@@ -115,12 +115,6 @@ export function detalharProduto(store, param) {
 
 export function adicionarNoCarrinho(store, params) {
   store.commit('addToShoppingCart', params)
-  Notify.create({
-    color: 'green',
-    position: 'bottom',
-    message: 'Produto adicionado no carrinho',
-    icon: 'ion-ios-checkmark'
-  })
 }
 
 export function removerDoCarrinho(store, params) {

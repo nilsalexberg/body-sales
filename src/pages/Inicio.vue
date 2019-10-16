@@ -51,7 +51,8 @@
 <script>
 import {
   QSelect, QCard, QCardSection, QCardActions, QImg,
-  QInfiniteScroll, QSpinner, QTooltip, QPageScroller
+  QInfiniteScroll, QSpinner, QTooltip, QPageScroller,
+  Notify
   } from 'quasar'
 
 export default {
@@ -108,6 +109,12 @@ export default {
     },
     addToCart (product) {
       this.$store.dispatch('produtos/adicionarNoCarrinho', product)
+      Notify.create({
+        color: 'green',
+        position: 'bottom',
+        message: 'Produto adicionado no carrinho',
+        icon: 'ion-ios-checkmark'
+      })
     }
     // filterGroup (val, update) {
     //   if (val === '') {
