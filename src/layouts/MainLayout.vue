@@ -6,7 +6,7 @@
           flat
           dense
           round
-          @click="$route.name == 'Inicio' ? leftDrawerOpen = !leftDrawerOpen : $router.go(-1)"
+          @click="$route.name == 'Inicio' ? leftDrawerOpen = !leftDrawerOpen : $router.push('inicio')"
           aria-label="Menu"
         >
           <q-icon :name="$route.name == 'Inicio' ? 'fas fa-bars' : 'fas fa-arrow-left'" />
@@ -91,9 +91,6 @@ export default {
       leftDrawerOpen: this.$q.platform.is.desktop,
       transition: {enter: 'fadeInUp', leave: 'fadeOutUp'}
     }
-  },
-  mounted () {
-    console.log(this.$route.meta)
   },
   watch: {
     '$route' (to, from) {
