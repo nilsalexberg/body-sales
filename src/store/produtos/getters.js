@@ -12,6 +12,10 @@ export function getProductsCount(state) {
   return state.productsCount
 }
 
+export function getProductDetails(state) {
+  return state.getProductDetails
+}
+
 export function getShoppingCart(state) {
   return state.shoppingCart
 }

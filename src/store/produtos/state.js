@@ -3,5 +3,6 @@ export default {
   lista: [],
   products: [],
   productsCount: 1,
-  shoppingCart: []
+  shoppingCart: [],
+  productDetails: {}
 }

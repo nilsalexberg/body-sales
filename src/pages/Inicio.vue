@@ -22,7 +22,9 @@
             <q-card-actions align="right">
               <q-btn flat round color="teal" icon="add_shopping_cart" @click="addToCart(product)" />
             </q-card-actions>
-            <q-img class="card-img" :src="product.urlProduto"></q-img>
+            <router-link :to="{ name: 'Produto', params: { product: product} }">
+              <q-img class="card-img" :src="product.urlProduto"></q-img>
+            </router-link>
             <q-card-section>
               <div class="text-h7">{{ product.Produto_Descricao }}</div>
               <div class="text-subtitle2">R$ {{ product.preco_venda }},00</div>
