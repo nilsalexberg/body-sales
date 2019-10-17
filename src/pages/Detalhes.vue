@@ -49,7 +49,8 @@ export default {
         color: 'green',
         position: 'bottom',
         message: 'Produto adicionado no carrinho',
-        icon: 'ion-ios-checkmark'
+        icon: 'ion-ios-checkmark',
+        timeout: 500
       })
     }
   }
