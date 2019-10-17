@@ -27,12 +27,10 @@ export function addToShoppingCart(state, payload) {
   state.shoppingCart.push(payload)
   /** Sort shopping cart by same products */
   state.shoppingCart.sort(function(a, b) {return a.ID_Produto - b.ID_Produto})
-  console.log(state.shoppingCart)
 }
 
 export function removeFromShoppingCart(state, payload) {
   state.shoppingCart.splice(payload, 1)
-  console.log(state.shoppingCart)
 }
 
 export function cleanShoppingCart(state) {
@@ -42,24 +40,20 @@ export function cleanShoppingCart(state) {
 export function addQuantityShoppingCart(state, payload) {
   for(let i = 0; i < state.qtdShoppingCart.length; i++) {
     if (state.qtdShoppingCart[i].ID_Produto == payload.ID_Produto) {
-      console.log(state.qtdShoppingCart)
       state.qtdShoppingCart[i].quantidade += 1
       return
     }
   }
   state.qtdShoppingCart.push(payload)
   state.qtdShoppingCart[state.qtdShoppingCart.length - 1]['quantidade'] = 1
-  console.log(state.qtdShoppingCart)
 }
 
 export function removeQuantityShoppingCart(state, payload) {
   for(let i = 0; i < state.qtdShoppingCart.length; i++) {
     if (state.qtdShoppingCart[i].ID_Produto == payload.product.ID_Produto) {
-      console.log(state.qtdShoppingCart)
       state.qtdShoppingCart[i].quantidade -= 1
     }
     if (state.qtdShoppingCart[i].quantidade == 0)
       state.qtdShoppingCart.splice(payload.index, 1)
   }
-  console.log(state.qtdShoppingCart)
 }

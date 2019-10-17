@@ -109,7 +109,6 @@ export function paginar(store, params) {
 }
 
 export function detalharProduto(store, param) {
-  console.log(param)
   store.commit('setProductDetails', param)
 }
 

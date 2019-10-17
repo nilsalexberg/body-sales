@@ -3,12 +3,10 @@ export function getGroups(state) {
 }
 
 export function getProducts(state) {
-  console.log(state.products)
   return state.products
 }
 
 export function getProductsCount(state) {
-  // console.log(state.productsCount)
   return state.productsCount
 }
 
