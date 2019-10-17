@@ -119,7 +119,7 @@ export function adicionarNoCarrinho(store, params) {
 }
 
 export function removerDoCarrinho(store, params) {
-  store.commit('removeFromShoppingCart', params)
+  store.commit('removeFromShoppingCart', params.index)
   store.commit('removeQuantityShoppingCart', params)
 }
 
