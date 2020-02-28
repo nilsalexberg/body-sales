@@ -3,14 +3,29 @@ import { Loading, Notify } from 'quasar'
 
 export function autenticar(store, { username, password }) {
   Loading.show();
-  return new Promise((resolve, reject) => {
-    axios.post(`http://localhost:8888/posseidom.php?op=AutenticarJSON`, {
-      Nome: username,
-      Senha: password,
-      Emp_ID: 216
-    })
-      .then(({ data }) => {
 
+  var parameters = new FormData();
+  parameters.set('Nome', username);
+  parameters.set('Senha', password);
+  parameters.set('Emp_ID', 216);
+
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'post',
+      url: 'http://escoladmart.com/guto2/posseidom.php?op=AutenticarJSON',
+      data: parameters,
+      headers: {'Content-Type': 'multipart/form-data'}
+    })
+    // axios.post(`http://escoladmart.com/guto2/posseidom.php?op=AutenticarJSON`, {
+    //   Nome: username,
+    //   Senha: password,
+    //   Emp_ID: 216
+    // },
+    // {
+    //   headers: {'Content-Type': 'multipart/form-data'}
+    // })
+      .then(({ data }) => {
+        // console.log(data);
         if (data.TokenAtivo.substring(0, 3) !== 'RN.') {
           store.commit('setLogged', true);
 
@@ -34,7 +49,8 @@ export function autenticar(store, { username, password }) {
           reject();
         }
       })
-      .catch(() => {
+      .catch((e) => {
+        // console.log(e);
         Notify.create({
           color: 'red',
           position: 'bottom',
