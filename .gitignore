@@ -22,3 +22,5 @@ yarn-error.log*
 
 # Statics
 /src/statics
+/src/statics/icons
+/src-cordova/res
