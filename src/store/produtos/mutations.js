@@ -35,6 +35,7 @@ export function removeFromShoppingCart(state, payload) {
 
 export function cleanShoppingCart(state) {
   state.shoppingCart = []
+  state.qtdShoppingCart = []
 }
 
 export function addQuantityShoppingCart(state, payload) {
