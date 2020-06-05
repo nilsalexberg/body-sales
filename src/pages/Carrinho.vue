@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     sendOrder () {
-      this.$store.dispatch('produtos/enviarPedidos', this.shoppingCart)
+      this.$store.dispatch('produtos/enviarPedidos', this.qtdShoppingCart)
     },
     addToCart (product) {
       this.$store.dispatch('produtos/adicionarNoCarrinho', product)
