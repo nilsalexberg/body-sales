@@ -248,6 +248,7 @@ export function formatarPedido(shoppingCart) {
       Codigo_CPG: "1",            // Atualmente sempre esse valor que é para 1x. Depois Obtê-lo do endpoint ObterFormasPagamento
       CodigoForma_Pagamento: "2", // Atualmente sempre esse valor que é para Dinheiro. Depois Obtê-lo do endpoint ObterModalidadePagamento
       Pedido_Legado: agora.getFullYear().toString() + parseInt(agora.getMonth()+1).toString() + agora.getMonth().toString() + agora.getHours().toString() + agora.getMinutes().toString() + agora.getSeconds().toString() + makechar(6),
+      Desconto_Pedido: "0.0",
       ItensPedido: itens_pedido   // verificar se assim pega o ItensPedido de cima
     }
   ];
