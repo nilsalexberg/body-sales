@@ -192,7 +192,7 @@ export function enviarPedidos(store, params) {
   })
     .then(({ data }) => {
       store.commit('cleanShoppingCart')
-      // console.log(data);
+      console.log(data);
     })
     .catch(() => {
       Notify.create({
@@ -225,14 +225,14 @@ export function formatarPedido(shoppingCart) {
     for(let i in shoppingCart) {
       ItemPedido.push(
         {
-          ID_ItemPedido: parseInt(i)+1,
-          ID_Produto: shoppingCart[i].ID_Produto,
-          Quantidade: shoppingCart[i].quantidade,
+          ID_ItemPedido: (parseInt(i)+1).toString(),
+          ID_Produto: shoppingCart[i].Codigo_Produto.toString(),
+          Quantidade: shoppingCart[i].quantidade.toString(),
           Unidade: "und",
-          Preco_Unitario: shoppingCart[i].preco_venda,
-          Valor_Desconto: 0,
-          Valor_Produto: shoppingCart[i].quantidade * shoppingCart[i].preco_venda,
-          Valor_Total: (shoppingCart[i].quantidade * shoppingCart[i].preco_venda) - 0
+          Preco_Unitario: shoppingCart[i].preco_venda.toString(),
+          Valor_Desconto: "0",
+          Valor_Produto: (shoppingCart[i].quantidade * shoppingCart[i].preco_venda).toString(),
+          Valor_Total: ((shoppingCart[i].quantidade * shoppingCart[i].preco_venda) - 0).toString()
         }
       )
     }
