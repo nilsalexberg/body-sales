@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <div class="q-gutter-md">
       <q-select filled v-model="group" :options="groups" label="Grupo"
-        option-value="Codigo_Grupo" option-label="Descricao"
+        option-value="Codigo_Grupo" option-label="Descricao" color="red"
         use-input input-debounce="0" @input="getProductsByFilter">
         <template v-slot:no-option>
           <q-item>
@@ -13,7 +13,7 @@
         </template>
       </q-select>
 
-      <q-input filled v-model="description" label="Descrição" placeholder="Busca na Body"
+      <q-input filled color="red" v-model="description" label="Descrição" placeholder="Busca na Body"
         use-input input-debounce="0" @input="getProductsByFilter" />
 
       <q-infinite-scroll @load="onLoadProducts" class="q-mt-md row">
