@@ -33,7 +33,7 @@
           </template>
           Não há itens adicionados no carrinho :(
           <template v-slot:action>
-            <q-btn flat color="primary" label="Ver produtos para adicionar" to="/inicio" />
+            <q-btn flat color="secondary" label="Ver produtos para adicionar" to="/inicio" />
           </template>
         </q-banner>
       </div>
