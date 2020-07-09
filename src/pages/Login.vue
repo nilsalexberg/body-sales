@@ -5,18 +5,18 @@
     </div>
 
     <form @submit.prevent="login" :disabled="loading">
-      <q-input filled v-model="username" label="Usuário">
+      <q-input filled color="red" v-model="username" label="Usuário">
         <template v-slot:prepend>
           <q-icon name="ion-ios-person" />
         </template>
       </q-input>
-      <q-input filled v-model="password" type="password" label="Senha">
+      <q-input filled color="red" v-model="password" type="password" label="Senha">
         <template v-slot:prepend>
           <q-icon name="ion-ios-lock" />
         </template>
       </q-input>
 
-      <q-btn color="primary" class="full-width" label="Entrar" type="submit" :disabled="loading" />
+      <q-btn color="red" class="full-width" label="Entrar" type="submit" :disabled="loading" />
     </form>
   </q-page>
 </template>
