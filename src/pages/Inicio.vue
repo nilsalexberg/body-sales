@@ -3,7 +3,7 @@
     <div class="q-gutter-md">
       <q-select filled v-model="group" :options="groups" label="Grupo"
         option-value="Codigo_Grupo" option-label="Descricao" color="red"
-        use-input input-debounce="0" @input="getProductsByFilter">
+        input-debounce="0" @input="getProductsByFilter">
         <template v-slot:no-option>
           <q-item>
             <q-item-section class="text-grey">
