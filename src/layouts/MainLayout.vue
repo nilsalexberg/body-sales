@@ -67,6 +67,15 @@
             <q-item-label>Conta</q-item-label>
           </q-item-section>
         </q-item>
+
+        <q-item clickable @click.prevent="logout" active-class="text-red">
+          <q-item-section avatar>
+            <q-icon name="ion-md-exit" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Sair</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -106,7 +115,11 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    logout () {
+      this.$router.replace('/login');
+      this.$store.dispatch('login/sair');
+    }
   }
 }
 </script>

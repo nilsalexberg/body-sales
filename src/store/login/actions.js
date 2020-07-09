@@ -64,3 +64,7 @@ export function autenticar(store, { username, password }) {
       });
   });
 }
+
+export function sair() {
+  localStorage.clear()
+}
