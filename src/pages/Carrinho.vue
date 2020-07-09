@@ -19,7 +19,12 @@
             </q-card-actions>
           </q-card>
         </div>
-        <q-btn :ripple="{ center: true }" class="full-width" label="Enviar pedido" color="secondary" @click="sendOrder()" />
+        <q-input class="my-input" v-model="observation" outlined label="Observação">
+          <template v-slot:append>
+            <q-icon name="content_paste" />
+          </template>
+        </q-input>
+        <q-btn :ripple="{ center: true }" class="full-width my-card" label="Enviar pedido" color="secondary" @click="sendOrder()" />
       </div>
       <div v-else>
         <q-banner class="bg-transparent-3">
@@ -46,6 +51,9 @@ import {
   } from 'quasar'
 
 export default {
+  data: {
+    observation: ""
+  },
   components: {
     QCard, QCardSection, QCardActions, QImg, QInput,
     QSpinnerTail, QTooltip, QPageSticky, QBanner
@@ -60,7 +68,7 @@ export default {
   },
   methods: {
     sendOrder () {
-      this.$store.dispatch('produtos/enviarPedidos', this.qtdShoppingCart)
+      this.$store.dispatch('produtos/enviarPedidos', { qtdShoppingCart: this.qtdShoppingCart, observation: this.observation })
     },
     addToCart (product) {
       this.$store.dispatch('produtos/adicionarNoCarrinho', product)
@@ -74,5 +82,13 @@ export default {
 <style>
 .qtd {
   padding: 0.75em;
+}
+.my-input {
+  width: 96%;
+  margin-left: 0.4rem;
+  margin-bottom: 1rem;
+  height: auto;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12);
+  border-radius: 4px;
 }
 </style>

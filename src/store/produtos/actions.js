@@ -170,7 +170,7 @@ export function enviarPedidos(store, params) {
   Loading.show();
 
   // New correct form to sendOrder JSON
-  var order = JSON.stringify(formatarPedido(params));
+  var order = JSON.stringify(formatarPedido(params.qtdShoppingCart, params.observation));
 
   // console.log(params);
   console.log(order);
@@ -215,7 +215,7 @@ export function enviarPedidos(store, params) {
 
 }
 
-export function formatarPedido(shoppingCart) {
+export function formatarPedido(shoppingCart, observation) {
   // Variables to needed data
   var agora = new Date();
 
@@ -244,7 +244,7 @@ export function formatarPedido(shoppingCart) {
       Codigo_Cliente: "000001",
       Emissao: agora.getDate() + '/' + parseInt(agora.getMonth()+1) + '/' + agora.getFullYear(),
       Hora: agora.getHours() + ':' + agora.getMinutes(),
-      Observacao: "nao tem",      // Depois acrescentá-lo por um campo no app
+      Observacao: observation == null ? "nao tem" : observation,      // Depois acrescentá-lo por um campo no app
       Codigo_CPG: "1",            // Atualmente sempre esse valor que é para 1x. Depois Obtê-lo do endpoint ObterFormasPagamento
       CodigoForma_Pagamento: "2", // Atualmente sempre esse valor que é para Dinheiro. Depois Obtê-lo do endpoint ObterModalidadePagamento
       Pedido_Legado: agora.getFullYear().toString() + parseInt(agora.getMonth()+1).toString() + agora.getMonth().toString() + agora.getHours().toString() + agora.getMinutes().toString() + agora.getSeconds().toString() + makechar(6),
