@@ -19,7 +19,18 @@
             </q-card-actions>
           </q-card>
         </div>
-        <q-input class="my-input" v-model="observation" outlined label="Observação">
+        <q-select outlined class="my-input" v-model="client" :options="clients" label="Cliente"
+        option-value="Codigo_Cliente" option-label="Nome" color="red"
+        input-debounce="0" >
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                Sem resultados
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
+        <q-input outlined class="my-input" v-model="observation" label="Observação">
           <template v-slot:append>
             <q-icon name="content_paste" />
           </template>
@@ -47,16 +58,22 @@
 <script>
 import {
   QCard, QCardSection, QCardActions, QImg, QInput,
-  QSpinnerTail, QTooltip, QPageSticky, QBanner
+  QSpinnerTail, QTooltip, QPageSticky, QBanner, QSelect
   } from 'quasar'
 
 export default {
-  data: {
-    observation: ""
+  data() {
+    return {
+      client: { Codigo_Cliente: "000001", Nome: "CONSUMIDOR" },
+      observation: ""
+    }
+  },
+  mounted () {
+    this.$store.dispatch('clientes/obterClientes', {})
   },
   components: {
     QCard, QCardSection, QCardActions, QImg, QInput,
-    QSpinnerTail, QTooltip, QPageSticky, QBanner
+    QSpinnerTail, QTooltip, QPageSticky, QBanner, QSelect
   },
   computed: {
     shoppingCart() {
@@ -64,6 +81,9 @@ export default {
     },
     qtdShoppingCart() {
       return this.$store.getters['produtos/getQtdShoppingCart']
+    },
+    clients() {
+      return this.$store.getters['clientes/getClients']
     }
   },
   methods: {
