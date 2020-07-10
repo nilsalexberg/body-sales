@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import login from './login'
+import clientes from './clientes'
 import produtos from './produtos'
 
 Vue.use(Vuex)
@@ -15,6 +16,7 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       login,
+      clientes,
       produtos
     },
 
