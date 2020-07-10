@@ -170,7 +170,7 @@ export function enviarPedidos(store, params) {
   Loading.show();
 
   // New correct form to sendOrder JSON
-  var order = JSON.stringify(formatarPedido(params.qtdShoppingCart, params.observation));
+  var order = JSON.stringify(formatarPedido(params.qtdShoppingCart, params.observation, params.client));
 
   // console.log(params);
   console.log(order);
@@ -215,7 +215,7 @@ export function enviarPedidos(store, params) {
 
 }
 
-export function formatarPedido(shoppingCart, observation) {
+export function formatarPedido(shoppingCart, observation, client) {
   // Variables to needed data
   var agora = new Date();
 
@@ -241,7 +241,7 @@ export function formatarPedido(shoppingCart, observation) {
   var Pedido = [
     {
       ID_Pedido: "1",             // Alterar depois? COLOCAR UM AUTOINCREMENTADO NO state.js
-      Codigo_Cliente: "000001",
+      Codigo_Cliente: client.Codigo_Cliente,
       Emissao: agora.getDate() + '/' + parseInt(agora.getMonth()+1) + '/' + agora.getFullYear(),
       Hora: agora.getHours() + ':' + agora.getMinutes(),
       Observacao: observation == null ? "nao tem" : observation,      // Depois acrescentá-lo por um campo no app
