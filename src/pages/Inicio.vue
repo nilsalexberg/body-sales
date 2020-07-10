@@ -62,7 +62,7 @@ export default {
   },
   data () {
     return {
-      group: {Codigo_Grupo: 13, Descricao: "ALBUMINA", urlGrupo: null},
+      group: { Codigo_Grupo: 13, Descricao: "ALBUMINA", urlGrupo: null },
       description: "",
       page: 1,
     }

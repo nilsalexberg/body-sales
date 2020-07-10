@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     sendOrder () {
-      this.$store.dispatch('produtos/enviarPedidos', { qtdShoppingCart: this.qtdShoppingCart, observation: this.observation })
+      this.$store.dispatch('produtos/enviarPedidos', { qtdShoppingCart: this.qtdShoppingCart, observation: this.observation, client: this.client })
     },
     addToCart (product) {
       this.$store.dispatch('produtos/adicionarNoCarrinho', product)
