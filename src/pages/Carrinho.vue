@@ -19,6 +19,7 @@
             </q-card-actions>
           </q-card>
         </div>
+
         <q-select outlined class="my-input" v-model="client" :options="clients" label="Cliente"
         option-value="Codigo_Cliente" option-label="Nome" color="red"
         input-debounce="0" >
@@ -30,12 +31,30 @@
             </q-item>
           </template>
         </q-select>
+
         <q-input outlined class="my-input" v-model="observation" label="Observação">
           <template v-slot:append>
             <q-icon name="content_paste" />
           </template>
         </q-input>
-        <q-btn :ripple="{ center: true }" class="full-width my-card" label="Enviar pedido" color="secondary" @click="sendOrder()" />
+
+        <q-btn :ripple="{ center: true }" class="full-width my-card" label="Enviar pedido" color="secondary" @click="dialog = true" />
+        <q-dialog v-model="dialog" >
+          <q-card class="bg-teal text-white" style="width: 300px">
+            <q-card-section>
+              <div class="text-h6">Atenção</div>
+            </q-card-section>
+
+            <q-card-section class="q-pt-none">
+              Deseja confirmar o envio do Pedido? <br>
+            </q-card-section>
+
+            <q-card-actions align="right" class="bg-white text-teal">
+              <q-btn flat label="Sim" @click="sendOrder()" v-close-popup />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+
       </div>
       <div v-else>
         <q-banner class="bg-transparent-3">
@@ -57,23 +76,24 @@
 
 <script>
 import {
-  QCard, QCardSection, QCardActions, QImg, QInput,
-  QSpinnerTail, QTooltip, QPageSticky, QBanner, QSelect
+  QCard, QCardSection, QCardActions, QImg, QInput, QSpinnerTail,
+  QTooltip, QPageSticky, QBanner, QSelect, QDialog
   } from 'quasar'
 
 export default {
   data() {
     return {
       client: { Codigo_Cliente: "000001", Nome: "CONSUMIDOR" },
-      observation: ""
+      observation: "",
+      dialog: false
     }
   },
   mounted () {
     this.$store.dispatch('clientes/obterClientes', {})
   },
   components: {
-    QCard, QCardSection, QCardActions, QImg, QInput,
-    QSpinnerTail, QTooltip, QPageSticky, QBanner, QSelect
+    QCard, QCardSection, QCardActions, QImg, QInput, QSpinnerTail,
+    QTooltip, QPageSticky, QBanner, QSelect, QDialog
   },
   computed: {
     shoppingCart() {
