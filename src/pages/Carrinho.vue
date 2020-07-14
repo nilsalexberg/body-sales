@@ -41,12 +41,14 @@
         <q-btn :ripple="{ center: true }" class="full-width my-card" label="Enviar pedido" color="secondary" @click="dialog = true" />
         <q-dialog v-model="dialog" >
           <q-card class="bg-teal text-white" style="width: 300px">
-            <q-card-section>
+            <q-card-section class="row">
               <div class="text-h6">Atenção</div>
+              <q-space />
+              <q-btn icon="close" flat round dense v-close-popup />
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-              Deseja confirmar o envio do Pedido? <br>
+              Deseja confirmar o envio do Pedido?
             </q-card-section>
 
             <q-card-actions align="right" class="bg-white text-teal">
@@ -77,7 +79,7 @@
 <script>
 import {
   QCard, QCardSection, QCardActions, QImg, QInput, QSpinnerTail,
-  QTooltip, QPageSticky, QBanner, QSelect, QDialog
+  QTooltip, QPageSticky, QBanner, QSelect, QDialog, QSpace
   } from 'quasar'
 
 export default {
@@ -93,7 +95,7 @@ export default {
   },
   components: {
     QCard, QCardSection, QCardActions, QImg, QInput, QSpinnerTail,
-    QTooltip, QPageSticky, QBanner, QSelect, QDialog
+    QTooltip, QPageSticky, QBanner, QSelect, QDialog, QSpace
   },
   computed: {
     shoppingCart() {
