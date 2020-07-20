@@ -108,24 +108,9 @@ export default {
       // }
     },
     addToCart (product) {
-      if (product.Saldo_Disponivel_Dominio) {
+      this.$store.dispatch('produtos/verificarEstoque', product.Saldo_Disponivel_Dominio)
+      if(this.$store.getters['produtos/getProductDisponibility'])
         this.$store.dispatch('produtos/adicionarNoCarrinho', product)
-        Notify.create({
-          color: 'green',
-          position: 'bottom',
-          message: 'Produto adicionado no carrinho',
-          icon: 'ion-ios-checkmark',
-          timeout: 500
-        })
-      } else {
-        Notify.create({
-          color: 'red',
-          position: 'bottom',
-          message: 'Produto indisponível no estoque',
-          icon: 'ion-ios-close',
-          timeout: 500
-        })
-      }
     }
     // filterGroup (val, update) {
     //   if (val === '') {

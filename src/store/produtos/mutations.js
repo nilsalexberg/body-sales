@@ -58,3 +58,7 @@ export function removeQuantityShoppingCart(state, payload) {
       state.qtdShoppingCart.splice(payload.index, 1)
   }
 }
+
+export function setProductDisponibility(state, payload) {
+  state.productDisponibility = payload
+}

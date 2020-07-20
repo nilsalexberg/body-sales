@@ -5,5 +5,6 @@ export default {
   productsCount: 1,
   shoppingCart: [],
   qtdShoppingCart: [],
-  productDetails: {}
+  productDetails: {},
+  productDisponibility: true
 }

@@ -268,3 +268,25 @@ function makechar(length) {
   }
   return result;
 }
+
+export function verificarEstoque(store, productBalance) {
+  if(productBalance > 0) {
+    Notify.create({
+      color: 'green',
+      position: 'bottom',
+      message: 'Produto adicionado no carrinho',
+      icon: 'ion-ios-checkmark',
+      timeout: 500
+    })
+    store.commit('setProductDisponibility', true)
+  } else {
+    Notify.create({
+      color: 'red',
+      position: 'bottom',
+      message: 'Quantidade indisponível no estoque',
+      icon: 'ion-ios-close',
+      timeout: 500
+    })
+    store.commit('setProductDisponibility', false)
+  }
+}

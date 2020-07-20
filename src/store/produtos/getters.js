@@ -22,6 +22,10 @@ export function getQtdShoppingCart(state) {
   return state.qtdShoppingCart
 }
 
+export function getProductDisponibility(state) {
+  return state.productDisponibility
+}
+
 // export function getGroupsId(state) {
 //   return state.groups.filter(group => group.Codigo_Grupo)
 // }
