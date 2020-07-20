@@ -43,15 +43,10 @@ export default {
   },
   methods: {
     addToCart (product, quantity) {
-      for(let i = 0; i < quantity; i++)
-        this.$store.dispatch('produtos/adicionarNoCarrinho', product)
-      Notify.create({
-        color: 'green',
-        position: 'bottom',
-        message: 'Produto adicionado no carrinho',
-        icon: 'ion-ios-checkmark',
-        timeout: 500
-      })
+      this.$store.dispatch('produtos/verificarEstoque', product.Saldo_Disponivel_Dominio)
+      if(this.$store.getters['produtos/getProductDisponibility'])
+        for(let i = 0; i < quantity; i++)
+          this.$store.dispatch('produtos/adicionarNoCarrinho', product)
     }
   }
 }
