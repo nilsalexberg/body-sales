@@ -269,8 +269,10 @@ function makechar(length) {
   return result;
 }
 
-export function verificarEstoque(store, productBalance) {
-  if(productBalance > 0) {
+export function verificarEstoque(store, params) {
+  var specifiedProduct = store.getters.getQtdShoppingCart.find(element => element.ID_Produto == params.product.ID_Produto);
+  var quantityInCart = specifiedProduct ? specifiedProduct.quantidade : 0
+  if(params.product.Saldo_Disponivel_Dominio > 0 && (params.quantityAdded + quantityInCart <= params.product.Saldo_Disponivel_Dominio) ) {
     Notify.create({
       color: 'green',
       position: 'bottom',

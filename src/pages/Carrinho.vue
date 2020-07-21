@@ -113,7 +113,10 @@ export default {
       this.$store.dispatch('produtos/enviarPedidos', { qtdShoppingCart: this.qtdShoppingCart, observation: this.observation, client: this.client })
     },
     addToCart (product) {
-      this.$store.dispatch('produtos/adicionarNoCarrinho', product)
+      if(product.quantidade < product.Saldo_Disponivel_Dominio)
+        this.$store.dispatch('produtos/adicionarNoCarrinho', product)
+      else
+        this.$store.dispatch('produtos/verificarEstoque', {product: product, quantityAdded: 1})
     },
     removeFromCart (index, product) {
       this.$store.dispatch('produtos/removerDoCarrinho', {product: product , index: index})

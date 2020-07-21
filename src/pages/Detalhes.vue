@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     addToCart (product, quantity) {
-      this.$store.dispatch('produtos/verificarEstoque', product.Saldo_Disponivel_Dominio)
+      this.$store.dispatch('produtos/verificarEstoque', { product: product, quantityAdded: quantity })
       if(this.$store.getters['produtos/getProductDisponibility'])
         for(let i = 0; i < quantity; i++)
           this.$store.dispatch('produtos/adicionarNoCarrinho', product)

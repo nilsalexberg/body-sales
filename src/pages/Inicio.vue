@@ -108,7 +108,7 @@ export default {
       // }
     },
     addToCart (product) {
-      this.$store.dispatch('produtos/verificarEstoque', product.Saldo_Disponivel_Dominio)
+      this.$store.dispatch('produtos/verificarEstoque', { product: product, quantityAdded: 1 })
       if(this.$store.getters['produtos/getProductDisponibility'])
         this.$store.dispatch('produtos/adicionarNoCarrinho', product)
     }
