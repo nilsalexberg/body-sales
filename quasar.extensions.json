@@ -6,7 +6,7 @@
       "background_color": "#ed3835",
       "splashscreen_type": "pure"
     },
-    "build_always": true,
+    "build_always": false,
     "__internal": {
       "dev": {
         "spa": {
