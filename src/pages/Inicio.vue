@@ -1,9 +1,9 @@
 <template>
   <div class="q-pa-md">
     <div class="q-gutter-md">
-      <q-select filled v-model="group" :options="groupsFiltered" label="Grupo" use-input=""
-        option-value="Codigo_Grupo" option-label="Descricao" color="red"
-        input-debounce="0" @input="getProductsByFilter" @filter="getGroupsByFilter">
+      <q-select filled clearable v-model="group" :options="groupsFiltered"
+        color="red" label="Grupo" option-value="Codigo_Grupo" option-label="Descricao"
+        input-debounce="0" @input="getProductsByFilter" use-input="" @filter="getGroupsByFilter">
         <template v-slot:no-option>
           <q-item>
             <q-item-section class="text-grey">
