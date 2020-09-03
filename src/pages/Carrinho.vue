@@ -20,9 +20,9 @@
           </q-card>
         </div>
 
-        <q-select outlined class="my-input" v-model="client" :options="clients" label="Cliente"
-        option-value="Codigo_Cliente" option-label="Nome" color="red"
-        input-debounce="0" >
+        <q-select outlined class="my-input" v-model="client" :options="clientsFiltered"
+        color="red" label="Cliente" option-value="Codigo_Cliente" option-label="Nome"
+        input-debounce="0" use-input="" @filter="getClientsByFilter">
           <template v-slot:no-option>
             <q-item>
               <q-item-section class="text-grey">
@@ -106,9 +106,25 @@ export default {
     },
     clients() {
       return this.$store.getters['clientes/getClients']
+    },
+    clientsFiltered() {
+      return this.$store.getters['clientes/getClientsFiltered']
     }
   },
   methods: {
+    getClientsByFilter(val,update) {
+      if (val === '') {
+        update(() => {
+          this.$store.commit('clientes/setClientsFiltered', null)
+        })
+        return
+      }
+
+      update(() => {
+        const needle = val.toUpperCase()
+        this.$store.commit('clientes/setClientsFiltered', needle)
+      })
+    },
     sendOrder () {
       this.$store.dispatch('produtos/enviarPedidos', { qtdShoppingCart: this.qtdShoppingCart, observation: this.observation, client: this.client })
     },

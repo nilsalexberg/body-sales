@@ -1,3 +1,4 @@
 export default {
-  clients: []
+  clients: [],
+  clientsFiltered: []
 }
