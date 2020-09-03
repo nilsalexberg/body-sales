@@ -2,6 +2,10 @@ export function getGroups(state) {
   return state.groups
 }
 
+export function getGroupsFiltered(state) {
+  return state.groupsFiltered
+}
+
 export function getProducts(state) {
   return state.products
 }

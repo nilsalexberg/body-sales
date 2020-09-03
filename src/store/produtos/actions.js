@@ -33,6 +33,10 @@ export function obterGrupos(store) {
   })
 }
 
+export function filtrarGrupos(store) {
+
+}
+
 export function listar(store) {
   Loading.show();
 

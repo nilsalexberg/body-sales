@@ -1,5 +1,13 @@
 export function setGroups(state, payload) {
   state.groups = payload
+  state.groupsFiltered = payload
+}
+
+export function setGroupsFiltered(state, payload) {
+  if(payload)
+    state.groupsFiltered = state.groups.filter(v => v.Descricao.includes(payload))
+  else
+    state.groupsFiltered = state.groups
 }
 
 export function setLista(state, lista) {

@@ -1,9 +1,9 @@
 <template>
   <div class="q-pa-md">
     <div class="q-gutter-md">
-      <q-select filled v-model="group" :options="groups" label="Grupo"
+      <q-select filled v-model="group" :options="groupsFiltered" label="Grupo" use-input=""
         option-value="Codigo_Grupo" option-label="Descricao" color="red"
-        input-debounce="0" @input="getProductsByFilter">
+        input-debounce="0" @input="getProductsByFilter" @filter="getGroupsByFilter">
         <template v-slot:no-option>
           <q-item>
             <q-item-section class="text-grey">
@@ -75,6 +75,9 @@ export default {
     groups() {
       return this.$store.getters['produtos/getGroups']
     },
+    groupsFiltered() {
+      return this.$store.getters['produtos/getGroupsFiltered']
+    },
     products() {
       return this.$store.getters['produtos/getProducts']
     },
@@ -83,6 +86,19 @@ export default {
     }
   },
   methods: {
+    getGroupsByFilter(val, update) {
+      if (val === '') {
+        update(() => {
+          this.$store.commit('produtos/setGroupsFiltered', null)
+        })
+        return
+      }
+
+      update(() => {
+        const needle = val.toUpperCase()
+        this.$store.commit('produtos/setGroupsFiltered', needle)
+      })
+    },
     getProductsByFilter() {
       this.page = 1
       this.$store.dispatch('produtos/filtrar', {

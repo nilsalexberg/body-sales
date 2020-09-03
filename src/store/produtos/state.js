@@ -1,5 +1,6 @@
 export default {
   groups: [],
+  groupsFiltered: [],
   lista: [],
   products: [],
   productsCount: 1,
