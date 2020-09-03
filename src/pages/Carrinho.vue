@@ -20,7 +20,7 @@
           </q-card>
         </div>
 
-        <q-select outlined class="my-input" v-model="client" :options="clientsFiltered"
+        <q-select outlined clearable class="my-input" v-model="client" :options="clientsFiltered"
         color="red" label="Cliente" option-value="Codigo_Cliente" option-label="Nome"
         input-debounce="0" use-input="" @filter="getClientsByFilter">
           <template v-slot:no-option>
