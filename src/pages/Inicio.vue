@@ -7,7 +7,7 @@
         <template v-slot:no-option>
           <q-item>
             <q-item-section class="text-grey">
-              Sem resultados
+              Grupo não encontrado
             </q-item-section>
           </q-item>
         </template>
@@ -72,9 +72,6 @@ export default {
     this.$store.dispatch('produtos/obterGrupos', {})
   },
   computed: {
-    groups() {
-      return this.$store.getters['produtos/getGroups']
-    },
     groupsFiltered() {
       return this.$store.getters['produtos/getGroupsFiltered']
     },
@@ -128,18 +125,6 @@ export default {
       if(this.$store.getters['produtos/getProductDisponibility'])
         this.$store.dispatch('produtos/adicionarNoCarrinho', product)
     }
-    // filterGroup (val, update) {
-    //   if (val === '') {
-    //     update(() => {
-    //       this.groups = GROUP_OPTIONS
-    //     })
-    //     return
-    //   }
-    //   update(() => {
-    //     const needle = val.toLowerCase()
-    //     this.groups = GROUP_OPTIONS.filter(v => v.toLowerCase().indexOf(needle) > -1)
-    //   })
-    // }
   }
 }
 </script>

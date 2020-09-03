@@ -26,7 +26,7 @@
           <template v-slot:no-option>
             <q-item>
               <q-item-section class="text-grey">
-                Sem resultados
+                Cliente não encontrado
               </q-item-section>
             </q-item>
           </template>
@@ -103,9 +103,6 @@ export default {
     },
     qtdShoppingCart() {
       return this.$store.getters['produtos/getQtdShoppingCart']
-    },
-    clients() {
-      return this.$store.getters['clientes/getClients']
     },
     clientsFiltered() {
       return this.$store.getters['clientes/getClientsFiltered']
