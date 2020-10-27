@@ -32,3 +32,35 @@ export function obterClientes(store) {
       });
   })
 }
+
+export function obterVendedores(store) {
+  var parameters = new FormData();
+  parameters.set('Token', localStorage.getItem('token'));
+
+  return new Promise((resolve, reject) => {
+    // axios.post(`http://escoladmart.com/guto2/posseidom.php?op=ObterClientes`, {
+    //   Token: localStorage.getItem('token'),
+    // })
+    axios({
+      method: 'post',
+      url: 'http://escoladmart.com/guto2/posseidom.php?op=ObterVendedores',
+      data: parameters,
+      headers: {'Content-Type': 'multipart/form-data'}
+    })
+      .then(({ data }) => {
+        store.commit('setSellers', data)
+      })
+      .catch(() => {
+        Notify.create({
+          color: 'red',
+          position: 'bottom',
+          message: 'Erro de conexão',
+          icon: 'ion-ios-warning'
+        })
+        reject();
+      })
+      .finally(() => {
+
+      });
+  })
+}

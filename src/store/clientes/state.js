@@ -1,4 +1,6 @@
 export default {
   clients: [],
-  clientsFiltered: []
+  clientsFiltered: [],
+  sellers: [],
+  sellersFiltered: []
 }
