@@ -32,6 +32,18 @@
           </template>
         </q-select>
 
+        <q-select outlined clearable class="my-input" v-model="seller" :options="sellersFiltered"
+        color="red" label="Vendedor" option-value="Codigo_Vendedor" option-label="Nome"
+        input-debounce="0" use-input="" @filter="getSellersByFilter">
+          <template v-slot:no-option>
+            <q-item>
+              <q-item-section class="text-grey">
+                Vendedor(a) não encontrado(a)
+              </q-item-section>
+            </q-item>
+          </template>
+        </q-select>
+
         <q-input outlined class="my-input" v-model="observation" label="Observação">
           <template v-slot:append>
             <q-icon name="content_paste" />
@@ -86,12 +98,14 @@ export default {
   data() {
     return {
       client: { Codigo_Cliente: "000001", Nome: "CONSUMIDOR" },
+      seller: { Codigo_Vendedor: "v118", Nome: "APLICATIVO MATRIZ", Emp_ID: 216 },
       observation: "",
       dialog: false
     }
   },
   mounted () {
     this.$store.dispatch('clientes/obterClientes', {})
+    this.$store.dispatch('clientes/obterVendedores', {})
   },
   components: {
     QCard, QCardSection, QCardActions, QImg, QInput, QSpinnerTail,
@@ -106,6 +120,9 @@ export default {
     },
     clientsFiltered() {
       return this.$store.getters['clientes/getClientsFiltered']
+    },
+    sellersFiltered() {
+      return this.$store.getters['clientes/getSellersFiltered']
     }
   },
   methods: {
@@ -120,6 +137,19 @@ export default {
       update(() => {
         const needle = val.toUpperCase()
         this.$store.commit('clientes/setClientsFiltered', needle)
+      })
+    },
+    getSellersByFilter(val,update) {
+      if (val === '') {
+        update(() => {
+          this.$store.commit('clientes/setSellersFiltered', null)
+        })
+        return
+      }
+
+      update(() => {
+        const needle = val.toUpperCase()
+        this.$store.commit('clientes/setSellersFiltered', needle)
       })
     },
     sendOrder () {
