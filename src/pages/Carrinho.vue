@@ -153,7 +153,7 @@ export default {
       })
     },
     sendOrder () {
-      this.$store.dispatch('produtos/enviarPedidos', { qtdShoppingCart: this.qtdShoppingCart, observation: this.observation, client: this.client })
+      this.$store.dispatch('produtos/enviarPedidos', { qtdShoppingCart: this.qtdShoppingCart, observation: this.observation, client: this.client, seller: this.seller })
     },
     addToCart (product) {
       if(product.quantidade < product.Saldo_Disponivel_Dominio)

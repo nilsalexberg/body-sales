@@ -170,7 +170,7 @@ export function enviarPedidos(store, params) {
   Loading.show();
 
   // New correct form to sendOrder JSON
-  var order = JSON.stringify(formatarPedido(params.qtdShoppingCart, params.observation, params.client));
+  var order = JSON.stringify(formatarPedido(params.qtdShoppingCart, params.observation, params.client, params.seller));
 
   // console.log(params);
   console.log(order);
@@ -215,7 +215,7 @@ export function enviarPedidos(store, params) {
 
 }
 
-export function formatarPedido(shoppingCart, observation, client) {
+export function formatarPedido(shoppingCart, observation, client, seller) {
   // Variables to needed data
   var agora = new Date();
 
@@ -249,7 +249,8 @@ export function formatarPedido(shoppingCart, observation, client) {
       CodigoForma_Pagamento: "2", // Atualmente sempre esse valor que é para Dinheiro. Depois Obtê-lo do endpoint ObterModalidadePagamento
       Pedido_Legado: agora.getFullYear().toString() + parseInt(agora.getMonth()+1).toString() + agora.getMonth().toString() + agora.getHours().toString() + agora.getMinutes().toString() + agora.getSeconds().toString() + makechar(6),
       Desconto_Pedido: "0.0",
-      ItensPedido: itens_pedido   // verificar se assim pega o ItensPedido de cima
+      ItensPedido: itens_pedido,   // verificar se assim pega o ItensPedido de cima
+      Codigo_Vendedor: seller.Codigo_Vendedor
     }
   ];
   var Pedidos = { Pedido };
