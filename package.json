@@ -1,8 +1,8 @@
 {
-  "name": "bodysales",
-  "version": "0.0.4",
-  "description": "Body Sales App",
-  "productName": "Body Sales",
+  "name": "bodyvendas",
+  "version": "0.0.5",
+  "description": "Body Vendas App",
+  "productName": "Body Vendas",
   "cordovaId": "br.com.body.sales",
   "author": "Gutemberg <gutem.borges@gmail.com>",
   "private": true,
@@ -12,6 +12,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "cordova": "^10.0.0",
     "quasar": "^1.0.0"
   },
   "devDependencies": {
